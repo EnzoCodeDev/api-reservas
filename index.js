@@ -13,7 +13,11 @@ dotenv.config();
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    console.log(process.env.MONGO);
+    await mongoose.connect(process.env.MONGO, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
     console.log("Conectado a mongo.");
   } catch (error) {
     throw error;
