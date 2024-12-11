@@ -13,7 +13,6 @@ dotenv.config();
 
 const connect = async () => {
   try {
-    console.log(process.env.MONGO);
     await mongoose.connect(process.env.MONGO, {
       useNewUrlParser: true,
       useUnifiedTopology: true

@@ -80,3 +80,26 @@ export const getRooms = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getRoomsByHotel = async (req, res, next) => {
+  try {
+    let idhotel = req.params.id_hotel;
+
+    // Obtener el hotel por su ID
+    const hotel = await Hotel.findById(idhotel);
+
+    if (!hotel) {
+      return res.status(404).json({ message: 'Hotel no encontrado' });
+    }
+
+    // Obtener las habitaciones por los IDs almacenados en el campo 'rooms' del hotel
+    const rooms = await Room.find({
+      '_id': { $in: hotel.rooms }  // Usamos $in para obtener habitaciones por los IDs en el array
+    });
+
+    // Retornar el hotel junto con sus habitaciones
+    res.status(200).json({ hotel, rooms });
+  } catch (err) {
+    next(err);
+  }
+};
