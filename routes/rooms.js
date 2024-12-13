@@ -7,6 +7,8 @@ import {
   updateRoom,
   updateRoomAvailability,
   getRoomsByHotel,
+  deleteRoomAvailability,
+  checkAvailability
 } from "../controllers/room.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
@@ -26,5 +28,7 @@ router.get("/:id", getRoom);
 
 router.get("/", getRooms);
 router.get("/byHotel/:id_hotel", getRoomsByHotel);
+router.put("/availability/delete/:id", deleteRoomAvailability);
+router.post("/availability/check/:id", checkAvailability);
 
 export default router;
